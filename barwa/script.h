@@ -1,9 +1,12 @@
 #pragma once
+#ifndef SCRIPT_H
+#define SCRIPT_H
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
+#include "package.h"
 
 namespace barwa {
 	class script {
@@ -21,6 +24,11 @@ namespace barwa {
 			bool load( const script& );
 
 			/*
+				Loading a package
+			*/
+			inline bool load_package( package* );
+
+			/*
 				Executing script
 			*/
 			bool run();
@@ -30,5 +38,12 @@ namespace barwa {
 				Preprocessed lines of code
 			*/
 			std::vector <std::string*> code;
+
+			/*
+				Package
+			*/
+			package* pack;
 	};
 }
+
+#endif

@@ -57,4 +57,18 @@ namespace barwa {
 
 		return true;
 	}
+
+	inline bool script::load_package( package* other ) {
+		// loading the package
+		if ( other->content.size() ) {
+			delete pack;
+			pack = new package;
+
+			*pack = *other;
+		} else return false;
+	}
+
+	bool script::run() {
+		return true;
+	}
 }
