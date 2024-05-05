@@ -6,9 +6,12 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <variant>
 #include "package.h"
 
 namespace barwa {
+	typedef std::variant<int_fast64_t, long double, std::string, bool> var;
+
 	class script {
 		public:
 			script();
@@ -38,7 +41,7 @@ namespace barwa {
 			/*
 				Preprocessed lines of code
 			*/
-			std::vector <std::string*> code;
+			std::vector<std::vector<std::string*>*> code;
 
 			/*
 				Package info

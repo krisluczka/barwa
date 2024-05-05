@@ -3,20 +3,23 @@
 namespace barwa {
 	script::script() {
 		package_available = false;
-		pack = nullptr;
 	}
 
 	script::~script() {
-		for ( std::string* l : code )
-			delete l;
-		
-		delete pack;
+        for ( std::vector<std::string*> *v : code ) {
+		    for ( std::string* l : *v )
+			    delete l;
+            delete v;
+        }
 	}
 
 	bool script::load( const std::string& path ) {
 		// clearing
-		for ( std::string* l : code )
-			delete l;
+        for ( std::vector<std::string*>* v : code ) {
+            for ( std::string* l : *v )
+                delete l;
+            delete v;
+        }
 		code.clear();
 
 		// opening the file
@@ -25,23 +28,30 @@ namespace barwa {
 			return false;
 
 		// preprocessing
+        std::vector<std::string*>* ptr;
 		std::string line, token;
-		std::string *line_of_code;
 		while ( getline( file, line ) ) {
-			line_of_code = new std::string("");
-
+            ptr = new std::vector<std::string*>;
 			std::stringstream ss( line );
 			while( ss >> token ) {
 				// if it is a comment, delete it
 				if ( token.substr( 0, 2 ) == "//" )
 					break;
-				*line_of_code += token + " ";
+                ptr->push_back( new std::string( token ) );
 			}
 
-			if ( *line_of_code != "" )
-				code.push_back( line_of_code );
-			else
-				delete line_of_code;
+            if ( ptr->size() )
+                code.push_back( ptr );
+            else
+                delete ptr;
+            /*
+                probably not necessary but I'll leave
+                it there just in case it will be
+
+                for( std::string *l : ptr )
+                    delete l;
+                delete ptr;
+            */
 		}
 
 		file.close();
@@ -54,13 +64,21 @@ namespace barwa {
 			return false;
 
 		// clearing
-		for ( std::string* l : code )
-			delete l;
+        for ( std::vector<std::string*>* v : code ) {
+            for ( std::string* l : *v )
+                delete l;
+            delete v;
+        }
 		code.clear();
 
 		// coping
-		for ( std::string* l : other.code )
-			code.push_back( new std::string( *l ) );
+        std::vector<std::string*>* ptr;
+        for ( std::vector<std::string*>* v : other.code ) {
+            ptr = new std::vector<std::string*>;
+            code.push_back( ptr );
+            for ( std::string* l : *v )
+                ptr->push_back( new std::string( *l ) );
+        }
 
 		return true;
 	}
@@ -72,9 +90,5 @@ namespace barwa {
 			package_available = true;
 			return true;
 		} else return false;
-	}
-
-	bool script::run() {
-		return true;
 	}
 }
