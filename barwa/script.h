@@ -11,6 +11,7 @@
 namespace barwa {
 	class script {
 		public:
+			script();
 			~script();
 
 			/*
@@ -26,7 +27,7 @@ namespace barwa {
 			/*
 				Loading a package
 			*/
-			inline bool load_package( package* );
+			inline bool load_package( const package& );
 
 			/*
 				Executing script
@@ -40,9 +41,10 @@ namespace barwa {
 			std::vector <std::string*> code;
 
 			/*
-				Package
+				Package info
 			*/
-			package* pack;
+			package pack;
+			bool package_available;
 	};
 }
 

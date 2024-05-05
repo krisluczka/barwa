@@ -1,9 +1,16 @@
 #include "script.h"
 
 namespace barwa {
+	script::script() {
+		package_available = false;
+		pack = nullptr;
+	}
+
 	script::~script() {
 		for ( std::string* l : code )
 			delete l;
+		
+		delete pack;
 	}
 
 	bool script::load( const std::string& path ) {
@@ -58,13 +65,12 @@ namespace barwa {
 		return true;
 	}
 
-	inline bool script::load_package( package* other ) {
+	inline bool script::load_package( const package &other ) {
 		// loading the package
-		if ( other->content.size() ) {
-			delete pack;
-			pack = new package;
-
-			*pack = *other;
+		if ( other.content.size() ) {
+			pack = other;
+			package_available = true;
+			return true;
 		} else return false;
 	}
 
