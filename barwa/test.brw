@@ -1,5 +1,5 @@
-value1 = 123
+value1 = 122
 
-value2 = 1
+value2 = 123
 
-value3 = value1 + value2 / value1
+value3 = ( ( 13 + 15 ) * 2 + 1 ) * 2 <= value2 + value1

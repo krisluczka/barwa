@@ -22,6 +22,8 @@ namespace barwa {
 				// evaluating the expression
 				*variables[*line->at( 0 )] =
 					std::to_string( evaluate( preprocess_expression( variables, expressions ) ) );
+
+				std::cout << *variables[*line->at( 0 )] << std::endl;
 			}
 		}
 

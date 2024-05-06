@@ -27,7 +27,7 @@
     <ClCompile Include="interpreter.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="computing.cpp">
+    <ClCompile Include="expressions.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>

@@ -51,11 +51,12 @@ namespace barwa {
 			bool package_available;
 
 			/*
-				Evaluating math equation
+				Evaluating expressions
 			*/
-			const inline bool is_operator( const char );
-			const inline int_fast8_t precedence( const char );
-			const inline long double apply_operation( const long double, const long double, const char );
+			inline std::string force_string( const char );
+			const inline bool is_operator( const std::string& );
+			const inline int_fast8_t precedence( const std::string& );
+			const inline long double apply_operation( const long double, const long double, const std::string& );
 			std::string preprocess_expression( vars&, std::vector<std::string*>& );
 			long double evaluate( const std::string& );
 	};
