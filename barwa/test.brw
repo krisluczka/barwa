@@ -1,3 +1,5 @@
-test_value = 123
+value1 = 123
 
-value_test = " testable string   1 2      5    7		.123                    " test
+value2 = 1
+
+value3 = value1 + value2 / value1

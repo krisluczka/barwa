@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="barwa.cpp" />
+    <ClCompile Include="computing.cpp" />
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="package.cpp" />
     <ClCompile Include="script.cpp" />

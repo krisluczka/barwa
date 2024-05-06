@@ -54,11 +54,6 @@ namespace barwa {
                 ptr->push_back( new std::string( token ) );
 			}
 
-			for ( std::string* l : *ptr ) {
-				std::cout << *l << std::endl;
-			}
-
-
 			// pushin
             if ( ptr->size() )
                 code.push_back( ptr );

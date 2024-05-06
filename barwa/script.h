@@ -6,11 +6,12 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <variant>
+#include <stack>
+#include <math.h>
 #include "package.h"
 
 namespace barwa {
-	typedef std::variant<int_fast64_t, long double, std::string, bool> var;
+	typedef std::map<std::string, std::string*> vars;
 
 	class script {
 		public:
@@ -48,6 +49,15 @@ namespace barwa {
 			*/
 			package pack;
 			bool package_available;
+
+			/*
+				Evaluating math equation
+			*/
+			const inline bool is_operator( const char );
+			const inline int_fast8_t precedence( const char );
+			const inline long double apply_operation( const long double, const long double, const char );
+			std::string preprocess_expression( vars&, std::vector<std::string*>& );
+			long double evaluate( const std::string& );
 	};
 }
 
