@@ -29,7 +29,8 @@ namespace barwa {
 
 		// preprocessing
         std::vector<std::string*>* ptr;
-		std::string line, token;
+		std::string line, token, quoted_token;
+		char c;
 		while ( getline( file, line ) ) {
             ptr = new std::vector<std::string*>;
 			std::stringstream ss( line );
@@ -37,17 +38,36 @@ namespace barwa {
 				// if it is a comment, delete it
 				if ( token.substr( 0, 2 ) == "//" )
 					break;
+
+				// if we starting with a string we tokenizing the whole string
+				if ( token[0] == '"' ) {
+					quoted_token = token;
+					while ( ss.get( c ) ) {
+						quoted_token += c;
+						if ( c == '\"' )
+							break;
+					}
+					ptr->push_back( new std::string( quoted_token ) );
+					continue;
+				}
+
                 ptr->push_back( new std::string( token ) );
 			}
 
+			for ( std::string* l : *ptr ) {
+				std::cout << *l << std::endl;
+			}
+
+
+			// pushin
             if ( ptr->size() )
                 code.push_back( ptr );
             else
                 delete ptr;
-            /*
-                probably not necessary but I'll leave
-                it there just in case it will be
-
+            
+            // probably not necessary but I'll leave
+            // it there just in case it will be
+			/*
                 for( std::string *l : ptr )
                     delete l;
                 delete ptr;

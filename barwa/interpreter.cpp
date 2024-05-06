@@ -24,7 +24,7 @@ namespace barwa {
 
 		// remember to clean up after yourself!
 		for ( const auto& pair : variables ) {
-			std::visit( []( auto&& arg ) { std::cout << arg << std::endl; }, *pair.second );
+			//std::visit( []( auto&& arg ) { std::cout << arg << std::endl; }, *pair.second );
 			delete pair.second;
 		}
 
